@@ -89,7 +89,7 @@ sudo systemctl start haproxy
 
 MACHINE_IP=$(ip addr show | awk '/inet / && $2 !~ /^127\.0\.0\.1/ {gsub(/\/.*/, "", $2); print $2; exit}')
 
-BASE_DOMAIN="${MACHINE_IP}.nip.io"
+BASE_DOMAIN="${MACHINE_IP}.crc.danielsson.us.com"
 openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout nip.key -out nip.crt -subj "/CN=${BASE_DOMAIN}" -addext "subjectAltName=DNS:apps.${BASE_DOMAIN},DNS:*.apps.${BASE_DOMAIN},DNS:api.${BASE_DOMAIN}"
 oc create secret tls nip-secret --cert=nip.crt --key=nip.key -n openshift-config
 
